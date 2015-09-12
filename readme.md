@@ -1,4 +1,5 @@
 # Cloud Royale API
 
 TODO:
-	[] Packagist / composer
+
+ - [ ] Packagist / composer
