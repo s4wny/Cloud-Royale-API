@@ -5,8 +5,8 @@
  *
  * Example usage:
  *	  $api = new CloudRoyaleAPI();
- *‮    $api->login();
- *‮    $servers = $api->getServers();
+ *    $api->login();
+ *    $servers = $api->getServers();
  *
  * @author Andreas Wallström
  */
