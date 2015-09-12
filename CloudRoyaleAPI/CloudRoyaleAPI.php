@@ -1,5 +1,7 @@
 <?php
 
+namespace CloudRoyaleAPI;
+
 /**
  * CloudRoyaleAPI
  *
@@ -75,7 +77,7 @@ class CloudRoyaleAPI
     /**
      * Get status about a specific server
      */
-    public function status($serverID)
+    public function getStatus($serverID)
     {
         return $this->curlGet('https://cloudroyale.se/admin/ajax.php?vm_status&id='. $serverID);
     }

@@ -1,0 +1,22 @@
+{
+    "name": "s4wny/cloud-royale-api",
+    "description": "Unoffical API for Cloud Royale",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andreas Wallström",
+            "homepage": "http://wallstrom.it",
+            "role": "Developer"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "CloudRoyaleAPI\\": "CloudRoyaleAPI"
+        }
+    }
+}
