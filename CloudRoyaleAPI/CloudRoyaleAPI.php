@@ -19,6 +19,7 @@ class CloudRoyaleAPI
 
     // cURL handler
     private $ch;
+    private $cookieFile = "";
 
     /**
      * Init cURL
@@ -34,7 +35,7 @@ class CloudRoyaleAPI
 
         $this->ch = curl_init();
 
-        $cookieFile = tempnam(sys_get_temp_dir(), "CURLCOOKIE");
+        $this->cookieFile = tempnam(sys_get_temp_dir(), "CURLCOOKIE");
 
         $options = [
             CURLOPT_RETURNTRANSFER => true,
@@ -51,10 +52,19 @@ class CloudRoyaleAPI
             CURLOPT_SSL_VERIFYPEER => false, 
 
             CURLOPT_COOKIESESSION  => true,
-            CURLOPT_COOKIEFILE     => $cookieFile
+            CURLOPT_COOKIEFILE     => $this->cookieFile
         ];
         curl_setopt_array($this->ch, $options);
     }
+
+    /**
+     * Free up resources
+     */
+    public function __destruct() {
+        unlink($this->cookieFile);
+        curl_close($this->ch);
+    }
+
 
     /**
      * Login to cloudroyale
