@@ -65,6 +65,19 @@ stdClass Object
 ?>
 ```
 
+### Methods
+
+ - __construct($username, $password)
+ - login()
+ - getStatus($serverID)
+ - getServers()
+ - startServer($serverID)
+ - stopServer($serverID)
+ - addSSHKeys($serverID)
+ - createServer($config)
+ 
+
+
 ## License
 
 This library is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
