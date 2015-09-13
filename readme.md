@@ -37,9 +37,21 @@ bool(true)
 
 Array
 (
-    [sadffsd34rfxd3] => node-server
-    [oxcujv8324sfdk] => http-server
-    [sdfxvujdf328fd] => vpn
+    [0] => Array
+        (
+            [ip] => 1.2.3.4
+            [id] => sadffsd34rfxd3
+            [name] => http server
+            [online] => false
+        )
+
+    [1] => Array
+        (
+            [ip] => 4.4.4.4
+            [id] => asfdsadf
+            [name] => vpn
+            [online] => true
+        )
 )
 
 stdClass Object

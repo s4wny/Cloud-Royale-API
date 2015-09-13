@@ -97,26 +97,62 @@ class CloudRoyaleAPI
      *
      * Return format:
      * 
-     *  array(
-     *      '*serverid*' => '*servername*',
-     *      'sdfsdf3sdf' => 'http server',
-     *      'dfk983cdkf' => 'vpn',
-     *  )
+     * Array
+     * (
+     *     [0] => Array
+     *         (
+     *             [ip] => 1.2.3.4
+     *             [id] => asdfsadfsdfa
+     *             [name] => http server
+     *             [online] => false
+     *         )
+     * 
+     *     [1] => Array
+     *         (
+     *             [ip] => 4.4.4.4
+     *             [id] => asdfsfad
+     *             [name] => vpn
+     *             [online] => true
+     *         )
+     * )
      *
      */
     public function getServers()
     {
         $html = $this->curlGet('https://cloudroyale.se/admin/');
 
-        $matches = array();
+        $serverIdAndName = array();
 
         // Assuming the server_id and server_name exsits in HTML formated like:
         //      <a href="/admin/vps?id=*alphanum*">*servername*</a>
         // Group 1: server id
         // Group 2: server name
-        preg_match_all('~<a href="/admin/vps\?id=([\w]+)">(.+?)(?=<)~', $html, $matches);
+        preg_match_all('~<a href="/admin/vps\?id=([\w]+)">(.+?)(?=<)~', $html, $serverIdAndName);
 
-        return array_combine($matches[1], $matches[2]);
+        // Get all IP addresses
+        $ips = array();
+        preg_match_all('~((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)~', $html, $ips);
+
+        // Get server status, on or off?
+        $onOff = array();
+        preg_match_all("~'>(AV|PÅ)</span>~", $html, $onOff);
+        $onOff = $onOff[1];
+        foreach ($onOff as $key => $value) {
+            $onOff[$key] = (bool) ($value == "PÅ");
+        }
+
+        $output = array();
+
+        foreach ($ips[0] as $key => $ip) {
+            $output[] = [
+                'ip'     => $ip,
+                'id'     => $serverIdAndName[1][$key],
+                'name'   => $serverIdAndName[2][$key],
+                'online' => $onOff[$key]
+            ];
+        }
+
+        return $output;
     }
 
     /**
