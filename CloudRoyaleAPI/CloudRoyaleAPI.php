@@ -34,7 +34,7 @@ class CloudRoyaleAPI
 
         $this->ch = curl_init();
 
-        $cookieFile = tempnam ("/tmp", "CURLCOOKIE");
+        $cookieFile = tempnam(sys_get_temp_dir(), "CURLCOOKIE");
 
         $options = [
             CURLOPT_RETURNTRANSFER => true,
